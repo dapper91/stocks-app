@@ -84,7 +84,7 @@ class Parser:
         Parses nasdaq 'historical' web page table and returns historical data.
 
         :param ticker: ticker name
-        :return: historical data as list of dicts
+        :return: historical data as a list of dicts
         """
 
         page_dom = cls.parse_page(f'{cls.BASE_URL}/symbol/{ticker.lower()}/historical')
@@ -121,7 +121,7 @@ class Parser:
 
         :param ticker: ticker name
         :param page: page number to parse
-        :return: historical data as list of dicts
+        :return: historical data as a list of dicts
         """
 
         page_dom = cls.parse_page(f'{cls.BASE_URL}/symbol/{ticker.lower()}/insider-trades', page=page)
@@ -159,9 +159,9 @@ class Parser:
     @classmethod
     def parse_trades_page_count(cls, page_dom):
         """
-        Traverses nasdaq 'insider-trades' page DOM to find page count.
+        Traverses nasdaq 'insider-trades' page DOM to find the page count.
 
-        :param page_dom:
+        :param page_dom: page DOM to traverse
         :return: number of pages
         """
 
