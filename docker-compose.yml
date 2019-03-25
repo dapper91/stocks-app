@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: postgres:10.7
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - 5432:5432
+  app:
+    build: app
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_HOST: db
+      PORT: 8080
+      HTTP_WORKERS: ${HTTP_WORKERS-4}
+      FETCHER_WORKERS: ${FETCHER_WORKERS-16}
+      MAX_PAGES: ${MAX_PAGES-10}
+    ports:
+      - 80:8080
+    depends_on:
+      - db
