@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from 'form_helpers.html' import render_field, render_form %}
+
+{% block title %}
+Получить данные для анализа разности цен
+{% endblock %}
+
+{% block content %}
+<div>
+	<h1 class="mt-5">
+		{{ self.title() }}
+	</h1>
+
+	{% set fields = [
+		(form.ticker, 		{'label': "Акция", 'placeholder': "CVX"}),
+		(form.date_from, 	{'label': "Начальная дата", 'placeholder': "2019-01-01"}),
+		(form.date_to, 		{'label': "Конечная дата", 'placeholder': "2019-01-07"}),
+	] %}
+
+	{{ render_form(fields, endpoint='analytics_form', submit_value="Получить" ) }}
+</div>
+
+{% endblock %}

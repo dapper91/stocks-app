@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import 'table_helpers.html' as table_macro %}
+
+{% block title %}
+Анализ разности цен
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mt-5">{{ self.title() }}</h1>
+    <p class="lead">
+        Данные для анлиза разности цен на  <a href="{{ url_for('common.get_ticker', ticker=ticker) }}">'{{ ticker }}'</a> с {{ date_from }} по {{ date_to }}
+    </p>
+
+    {% set headers_map = {
+        'start_date': 	'Начальная дата',
+        'start_price': 	'Начальная цена',
+        'end_date': 	'Конечная дата',
+        'end_price': 	'Конечная цена',
+        'price_type': 	'Тип цены',
+        'price_diff': 	'Разница цен'
+    } %}
+
+    {{ table_macro.render_simple_table(headers_map, data, add_index=True) }}
+</div>
+
+{% endblock %}

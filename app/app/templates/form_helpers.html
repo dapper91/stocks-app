@@ -1,0 +1,28 @@
+{% macro render_field(field) %}
+
+<div class="form-group">
+    <label>{{ kwargs.get('label') or field.label }}</label>
+
+    {{ field(class="form-control", **kwargs) }}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endmacro %}
+
+
+{% macro render_form(fields, endpoint, submit_value) %}
+
+<form method="POST" action="{{ url_for(endpoint) }}">
+    {% for field, args in fields %}
+        {{ render_field(field, **args) }}
+    {% endfor %}
+    <input type="submit" class="btn btn-primary" value="{{ submit_value }}">
+</form>
+
+{% endmacro %}

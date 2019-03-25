@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Данные торговли
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h1 class="mt-5">{{ self.title() }}</h1>
+	<p class="lead">
+		Данные торговли акциями компании  <a href="{{ url_for('common.get_ticker', ticker=ticker) }}">'{{ ticker }}'</a> владельцем '{{ name }}'
+	</p>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Имя владельца</th>
+				<th>Должность владельца</th>
+				<th>Тип транзакции</th>
+				<th>Тип владения</th>
+				<th>Последняя дата</th>
+				<th>Последняя цена</th>
+				<th>Акций продано</th>
+				<th>Акций удержано</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for trade in trades %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ trade.insider.name }}</td>
+				<td>{{ trade.insider.relation }}</td>
+				<td>{{ trade.transaction_type }}</td>
+				<td>{{ trade.owner_type }}</td>
+				<td>{{ trade.last_date }}</td>
+				<td>{{ trade.last_price if trade.last_price is not none else '' }}</td>
+				<td>{{ trade.shares_traded }}</td>
+				<td>{{ trade.shares_hold }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+
+	</table>
+</div>
+
+{% endblock %}

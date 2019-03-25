@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import 'table_helpers.html' as table_macro %}
+
+{% block title %}
+Анализ периодов
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h1 class="mt-5">{{ self.title() }}</h1>
+	<p class="lead">
+		Данные о минимальных периодах, когда цена '{{ price_type }}' на  <a href="{{ url_for('common.get_ticker', ticker=ticker) }}">'{{ ticker }}'</a> изменилась более чем на {{ value }}
+	</p>
+
+	{% set headers_map = {
+        'start_date': 	'Начальная дата',
+        'start_price': 	'Начальная цена',
+        'end_date': 	'Конечная дата',
+        'end_price': 	'Конечная цена',
+        'price_diff': 	'Разница цен',
+        'date_diff': 	'Период'
+    } %}
+
+    {{ table_macro.render_simple_table(headers_map, data, add_index=True) }}
+</div>
+
+{% endblock %}

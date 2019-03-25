@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Список доступных акций
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h1 class="mt-5">{{ self.title() }}</h1>
+	<p class="lead">
+		Акции, полученные с <a href="http://www.nasdaq.com">NASDAQ</a>
+	</p>
+
+	<ul>
+		{% for stock in stocks %}
+		<li>
+			<a href="{{ url_for('common.get_ticker', ticker=stock.ticker) }}">
+				{{ stock.ticker }}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}

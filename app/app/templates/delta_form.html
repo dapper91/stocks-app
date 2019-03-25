@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from 'form_helpers.html' import render_field, render_form %}
+
+{% block title %}
+Получить данные для анализа периодов
+{% endblock %}
+
+{% block content %}
+<div>
+	<h1 class="mt-5">
+		{{ self.title() }}
+	</h1>
+
+	{% set fields = [
+		(form.ticker, 	{'label': "Акция", 'placeholder': "CVX"}),
+		(form.type, 	{'label': "Тип цены"}),
+		(form.value,	{'label': "Минимальное значение разности цен", 'placeholder': "10"}),
+	] %}
+
+	{{ render_form(fields, endpoint='delta_form', submit_value="Получить" ) }}
+</div>
+
+{% endblock %}

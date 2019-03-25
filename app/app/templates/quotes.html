@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% import 'table_helpers.html' as table_macro %}
+
+{% block title %}
+Цены на акции компании
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h1 class="mt-5">{{ self.title() }}</h1>
+	<p class="lead">
+		Цены на акции компании <a href="{{ url_for('common.get_ticker', ticker=ticker) }}">'{{ ticker }}'</a> за последние 3 месяца
+	</p>
+
+	<a href="{{ url_for('common.get_insiders', ticker=ticker) }}">
+		Данные торговли владельцев компании
+	</a>
+
+	{% set headers_map = {
+		'date': 		'Дата',
+		'open_price': 	'Цена открытия',
+		'close_price': 	'Цена закрытия',
+		'high_price': 	'Наивысшая цена',
+		'low_price': 	'Наинизшая цена',
+		'volume': 		'Объем продаж'
+	} %}
+
+	{{ table_macro.render_simple_table(headers_map, quotes, add_index=True) }}
+</div>
+
+{% endblock %}

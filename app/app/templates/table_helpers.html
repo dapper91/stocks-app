@@ -1,0 +1,31 @@
+{% macro render_simple_table(headers_map, rows, add_index=False) %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            {% if add_index %}
+            <th>#</th>
+            {% endif %}
+
+            {% for header in headers_map.values() %}
+            <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            {% if add_index %}
+            <td>{{ loop.index }}</td>
+            {% endif %}
+
+            {% for col_name in headers_map %}
+            <td>{{ row|attr(col_name) if row|attr(col_name) is not none else '' }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endmacro %}
