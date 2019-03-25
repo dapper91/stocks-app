@@ -14,7 +14,5 @@ COPY ./initdb.py ./data_fetcher.py ./
 COPY ./tickers.txt .
 COPY ./app ./app
 
-RUN ls -la /stocks-app/entrypoint.sh
-
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["gunicorn", "-c", "gunicorn.conf.py", "stocks_app:app"]
